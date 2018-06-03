@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Workbook List</h1>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+
+      <th><p class="text-center">First Name</p></th>
+      <th><p class="text-center">Last Name</p></th>
+      <th><p class="text-center">Date of Birth</p></th>
+      <th><p class="text-center">Age</p></th>
+      <th><p class="text-center">Passport Number</p></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workbook of workbooks">
+
+      <td>{{ workbook.firstName }}</td>
+      <td>{{ workbook.lastName }}</td>
+      <td>{{ workbook.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+      <td>{{ workbook.age }}</td>
+      <td>{{ workbook.passportNumber }}</td>
+      <td><a [routerLink]="['/workbook-view', workbook.id]"><span class="glyphicon glyphicon-check"></span></a></td>
+      <td><a [routerLink]="['/workbook-edit', workbook.id]"><span class="glyphicon glyphicon-edit"></span></a></td>
+      <td><a (click)="remove(workbook)"><span class="glyphicon glyphicon-remove"></span></a></td>
+    </tr>
+    </tbody>
+  </table>
+  <a [routerLink]="['/workbook-create']" class="btn btn-default">
+    Add
+  </a>
+</div>

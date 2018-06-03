@@ -1,0 +1,98 @@
+<div class="container">
+  <h1>Edit Workbook</h1>
+
+
+  <form (ngSubmit)="updateWorkbook()" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="hidden" class="form-control" [(ngModel)]="workbook.id" name="id">
+        </div>
+        <div class="form-group required">
+          <label for="firstName" class="control-label ">First Name</label>
+          <input type="text" class="form-control" [(ngModel)]="workbook.firstName" name="firstName" id="firstName"
+                 required>
+          <span class="help-bpx" *ngIf="errorMessages.get('firstName')">{{errorMessages.get('firstName')}}</span>
+        </div>
+        <div class="form-group required">
+          <label for="lastName" class="control-label ">Last Name</label>
+          <input type="text" class="form-control" [(ngModel)]="workbook.lastName" name="lastName" id="lastName"
+                 required>
+          <span class="help-bpx" *ngIf="errorMessages.get('lastName')">{{errorMessages.get('lastName')}}</span>
+        </div>
+        <div class="form-group ">
+          <label for="dateOfBirth" class="control-label">Date of Birth</label>
+          <input type="date" class="form-control " [(ngModel)]="workbook.dateOfBirth" name="dateOfBirth"
+                 id="dateOfBirth">
+        </div>
+        <div class="form-group ">
+          <label for="age" class="control-label">Age</label>
+          <input type="number" class="form-control " min="1" [(ngModel)]="workbook.age" name="age" id="age">
+        </div>
+        <div class="form-group ">
+          <label for="passportNumber" class="control-label">Passport Number</label>
+          <input type="text" class="form-control " min="1" [(ngModel)]="workbook.passportNumber" name="passportNumber"
+                 id="passportNumber">
+        </div>
+      </div>
+    </div>
+    <h2>Edit Workplaces</h2>
+    <div class="row" [formGroup]="invoiceForm">
+      <table class="table" formArrayName="itemRows">
+
+        <thead>
+        <tr>
+          <th></th>
+          <th><span class="required-label">Company</span></th>
+          <th><span class="required-label">Country</span></th>
+          <th><span class="required-label">Start Date</span></th>
+          <th>End Date</th>
+          <th>Current</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let workplace of invoiceForm.controls.itemRows.controls; let i = index " [formGroupName]="i">
+
+          <td><input type="hidden" class="form-control" formControlName="id" name="id"></td>
+          <td>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="company" name="company" required>
+              <span class="help-bpx" *ngIf="errorMessages.get('workplaces['+i+'].company')">{{errorMessages.get('workplaces['+i+'].company')}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <input type="text" class="form-control" name="country" formControlName="country" required>
+              <span class="help-bpx" *ngIf="errorMessages.get('workplaces['+i+'].country')">{{errorMessages.get('workplaces['+i+'].country')}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group required">
+              <input type="date" class="form-control" name="startDate" formControlName="startDate" required>
+              <span class="help-bpx" *ngIf="errorMessages.get('workplaces['+i+'].startDate')">{{errorMessages.get('workplaces['+i+'].startDate')}}</span>
+            </div>
+          </td>
+          <td><input type="date" class="form-control" name="endDate" formControlName="endDate"></td>
+          <td><input type="radio" class="form-control" name="current" formControlName="current"
+                     [checked]="workplace.value.current == true" (click)="setVal(i)"></td>
+          <td><a (click)="deleteRow(i)"><span class="glyphicon glyphicon-remove"></span></a></td>
+        </tr>
+        </tbody>
+        <a (click)="addWorkplace()" class="btn btn-default">
+          Add
+        </a>
+      </table>
+    </div>
+
+    <div class="btn-group pull-right" role="group">
+      <button type="submit" role="group" class="btn btn-default">SaveAndClose</button>
+      <a (click)="util.backToList()" role="group" class="btn btn-default">
+        Cancel
+      </a>
+    </div>
+
+  </form>
+
+
+</div>

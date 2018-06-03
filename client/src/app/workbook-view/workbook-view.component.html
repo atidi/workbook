@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Workplace View</h1>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th><p class="text-center">Company</p></th>
+      <th><p class="text-center">Country</p></th>
+      <th><p class="text-center">Start Date</p></th>
+      <th><p class="text-center">End Date</p></th>
+      <th><p class="text-center">Current</p></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workplace of workbook.workplaces">
+
+      <td>{{ workplace.company }}</td>
+      <td>{{ workplace.country }}</td>
+      <td>{{ workplace.startDate | date: 'dd/MM/yyyy'}}</td>
+      <td>{{ workplace.endDate | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ workplace.current }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <a (click)="util.backToList()" role="group" class="btn btn-default">
+    Cancel
+  </a>
+</div>
